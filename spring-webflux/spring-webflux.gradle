@@ -16,6 +16,7 @@ dependencies {
 	optional("org.freemarker:freemarker")
 	optional("com.fasterxml.jackson.core:jackson-databind")
 	optional("com.fasterxml.jackson.dataformat:jackson-dataformat-smile")
+	compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
 	optional("io.reactivex:rxjava")
 	optional("io.reactivex:rxjava-reactive-streams")
 	optional("io.projectreactor.netty:reactor-netty")

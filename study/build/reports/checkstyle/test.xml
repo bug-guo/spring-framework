@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.22">
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\SpringIOCConfig.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\TestMain.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\TestSpringIOC.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\aop\TestAspect.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\context\event\TestApplicationEvent.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\dao\TestDao.java">
+</file>
+<file name="E:\code\spring\spring-framework\study\src\test\java\com\smart\smile\test\transaction\TestTransaction.java">
+</file>
+</checkstyle>
