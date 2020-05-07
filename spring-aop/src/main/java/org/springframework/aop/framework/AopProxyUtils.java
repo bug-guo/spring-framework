@@ -122,15 +122,19 @@ public abstract class AopProxyUtils {
 			Class<?> targetClass = advised.getTargetClass();
 			if (targetClass != null) {
 				if (targetClass.isInterface()) {
+					// 目标对象是接口，添加为被代理的对象接口
 					advised.setInterfaces(targetClass);
 				}
 				else if (Proxy.isProxyClass(targetClass)) {
 					advised.setInterfaces(targetClass.getInterfaces());
 				}
+				// 重新获取接口
 				specifiedInterfaces = advised.getProxiedInterfaces();
 			}
 		}
+		//  判断是否是spring代理
 		boolean addSpringProxy = !advised.isInterfaceProxied(SpringProxy.class);
+		//
 		boolean addAdvised = !advised.isOpaque() && !advised.isInterfaceProxied(Advised.class);
 		boolean addDecoratingProxy = (decoratingProxy && !advised.isInterfaceProxied(DecoratingProxy.class));
 		int nonUserIfcCount = 0;
