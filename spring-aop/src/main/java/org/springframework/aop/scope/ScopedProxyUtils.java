@@ -55,9 +55,10 @@ public abstract class ScopedProxyUtils {
 	 */
 	public static BeanDefinitionHolder createScopedProxy(BeanDefinitionHolder definition,
 			BeanDefinitionRegistry registry, boolean proxyTargetClass) {
-
+		// bean的原始名称
 		String originalBeanName = definition.getBeanName();
 		BeanDefinition targetDefinition = definition.getBeanDefinition();
+		// 带有代理前缀scopedTarget.的名称
 		String targetBeanName = getTargetBeanName(originalBeanName);
 
 		// Create a scoped proxy definition for the original bean name,
@@ -81,10 +82,12 @@ public abstract class ScopedProxyUtils {
 		proxyDefinition.setAutowireCandidate(targetDefinition.isAutowireCandidate());
 		proxyDefinition.setPrimary(targetDefinition.isPrimary());
 		if (targetDefinition instanceof AbstractBeanDefinition) {
+			// 复制全限定名的配置
 			proxyDefinition.copyQualifiersFrom((AbstractBeanDefinition) targetDefinition);
 		}
 
 		// The target bean should be ignored in favor of the scoped proxy.
+		// 设置源bean在其它bean依赖于它的时候，不被作为一个候选项，因为需要放进去的是一个scoped的代理bean
 		targetDefinition.setAutowireCandidate(false);
 		targetDefinition.setPrimary(false);
 

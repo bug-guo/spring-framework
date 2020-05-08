@@ -132,6 +132,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			customizeBeanFactory(beanFactory);
 			/**
 			 * 加载bean定义，通过bean解析器进行解析加载
+			 * @scannPackage 搜索路径，并注册bean
 			 */
 			loadBeanDefinitions(beanFactory);
 			synchronized (this.beanFactoryMonitor) {

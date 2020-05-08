@@ -264,14 +264,25 @@ public abstract class AnnotationConfigUtils {
 		}
 	}
 
+	/**
+	 * @scope注解的检查
+	 * 检查bean是否需要创建为代理对象
+	 * @param metadata
+	 * @param definition
+	 * @param registry
+	 * @return
+	 */
 	static BeanDefinitionHolder applyScopedProxyMode(
 			ScopeMetadata metadata, BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
-
+		// 获取bean的代理配置，默认defaul no  不代理，主要用于原型bean使用
+		// 获取@scope的proxyMode属性
 		ScopedProxyMode scopedProxyMode = metadata.getScopedProxyMode();
 		if (scopedProxyMode.equals(ScopedProxyMode.NO)) {
 			return definition;
 		}
+		// cglib代理
 		boolean proxyTargetClass = scopedProxyMode.equals(ScopedProxyMode.TARGET_CLASS);
+		// 返回被代理后的bean定义的持有者
 		return ScopedProxyCreator.createScopedProxy(definition, registry, proxyTargetClass);
 	}
 

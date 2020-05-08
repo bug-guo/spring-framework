@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Aspect        // 不能作为bean的识别注解
 @Component
 public class PersonAspect {
+
 	@Pointcut(value = "execution(* com.smart.smile.aop.Person.*(..))")
 	public void pointcut1() {
 	}

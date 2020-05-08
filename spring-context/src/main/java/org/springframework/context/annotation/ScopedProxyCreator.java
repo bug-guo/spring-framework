@@ -36,7 +36,7 @@ final class ScopedProxyCreator {
 
 	public static BeanDefinitionHolder createScopedProxy(
 			BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry, boolean proxyTargetClass) {
-
+		// 返回bean的代理对象的bean定义，并将bean设置为不作为其他类的候选引用（使用代理），并将bean注册到工厂中
 		return ScopedProxyUtils.createScopedProxy(definitionHolder, registry, proxyTargetClass);
 	}
 
