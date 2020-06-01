@@ -342,7 +342,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 				// Create bean instance.
 				if (mbd.isSingleton()) {
-					// 获取单例，如果单例不存在，则创建单例
+					// 获取单例，如果单例不存在，则创建单例  切面bean创建位置
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
 							return createBean(beanName, mbd, args);

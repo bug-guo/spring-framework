@@ -900,9 +900,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.setTempClassLoader(null);
 
 		// Allow for caching all bean definition metadata, not expecting further changes.
+		// 冻结bean定义的配置信息，防止在创建过程中出现变更
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.
+		// 实例化非懒加载的剩余单例
 		beanFactory.preInstantiateSingletons();
 	}
 

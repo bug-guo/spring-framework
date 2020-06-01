@@ -28,7 +28,7 @@ public class UserServiceConfig {
 	}
 
 	@Bean
-	public UserServiceBeanPostProcessor createUserServiceBeanPostProcessor() {
+	public static UserServiceBeanPostProcessor createUserServiceBeanPostProcessor() {
 		return new UserServiceBeanPostProcessor();
 	}
 }

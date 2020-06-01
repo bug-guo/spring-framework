@@ -57,6 +57,7 @@ public class LazySingletonAspectInstanceFactoryDecorator implements MetadataAwar
 				this.materialized = aspectInstance;
 			}
 			else {
+				// 双重检查机制
 				synchronized (mutex) {
 					aspectInstance = this.materialized;
 					if (aspectInstance == null) {

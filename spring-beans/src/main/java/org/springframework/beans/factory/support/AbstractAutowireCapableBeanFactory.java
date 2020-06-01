@@ -430,6 +430,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			throws BeansException {
 		// 调用动态代理后置处理器
 		Object result = existingBean;
+		/**
+		 * 对于需要代理的bean，此处将调用AbstractAutoProxyCreator类
+		 */
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
 			Object current = processor.postProcessAfterInitialization(result, beanName);
 			if (current == null) {

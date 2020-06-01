@@ -87,7 +87,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		this();
 		/**
 		 * 注册应用上下文所需组件,
-		 * aop 注解 再次被加载
 		 */
 		register(componentClasses);
 		refresh();

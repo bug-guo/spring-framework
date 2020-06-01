@@ -100,6 +100,11 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 		return false;
 	}
 
+	/**
+	 * 检查aspectClass是否是有效AspectJ类，以及是否合法
+	 * @param aspectClass the supposed AspectJ annotation-style class to validate
+	 * @throws AopConfigException
+	 */
 	@Override
 	public void validate(Class<?> aspectClass) throws AopConfigException {
 		// If the parent has the annotation and isn't abstract it's an error
@@ -130,6 +135,7 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 	@SuppressWarnings("unchecked")
 	@Nullable
 	protected static AspectJAnnotation<?> findAspectJAnnotationOnMethod(Method method) {
+		//Pointcut.class, Around.class, Before.class, After.class, AfterReturning.class, AfterThrowing.class
 		for (Class<?> clazz : ASPECTJ_ANNOTATION_CLASSES) {
 			AspectJAnnotation<?> foundAnnotation = findAnnotation(method, (Class<Annotation>) clazz);
 			if (foundAnnotation != null) {

@@ -30,6 +30,8 @@ import org.springframework.lang.Nullable;
  * advanced features and thus might throw corresponding exceptions when given
  * non-default values.
  *
+ * 隔离级别和超时时间仅对新创建的事务有效
+ *
  * <p>The {@link #isReadOnly() read-only flag} applies to any transaction context,
  * whether backed by an actual resource transaction or operating non-transactionally
  * at the resource level. In the latter case, the flag will only apply to managed
@@ -44,6 +46,7 @@ import org.springframework.lang.Nullable;
 public interface TransactionDefinition {
 
 	/**
+	 * 如果当前事务存在，则在当前事务中提交，否则，创建一个新的事务用于提交。
 	 * Support a current transaction; create a new one if none exists.
 	 * Analogous to the EJB transaction attribute of the same name.
 	 * <p>This is typically the default setting of a transaction definition,
@@ -81,6 +84,7 @@ public interface TransactionDefinition {
 	int PROPAGATION_MANDATORY = 2;
 
 	/**
+	 * 如果当前存在事务，则挂起当前事务，并创建一个新的事务进行提交
 	 * Create a new transaction, suspending the current transaction if one exists.
 	 * Analogous to the EJB transaction attribute of the same name.
 	 * <p><b>NOTE:</b> Actual transaction suspension will not work out-of-the-box
@@ -119,6 +123,7 @@ public interface TransactionDefinition {
 	int PROPAGATION_NEVER = 5;
 
 	/**
+	 * 如果存在当前事务，则在该事务中嵌套一个事务进行提交。
 	 * Execute within a nested transaction if a current transaction exists,
 	 * behave like {@link #PROPAGATION_REQUIRED} otherwise. There is no
 	 * analogous feature in EJB.

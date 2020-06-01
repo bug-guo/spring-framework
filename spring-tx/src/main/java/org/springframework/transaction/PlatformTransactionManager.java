@@ -24,6 +24,9 @@ import org.springframework.lang.Nullable;
  * Typically, applications will work with either TransactionTemplate or
  * declarative transaction demarcation through AOP.
  *
+ * 该接口是spring事务框架的中心接口。应用可以直接使用该接口，但是作为API不是主要的使用方式。
+ * 典型的是，应用会和事务模板（TransactionTemplate) 或者 通过AOP使用的声明式事务 一起使用
+ *
  * <p>For implementors, it is recommended to derive from the provided
  * {@link org.springframework.transaction.support.AbstractPlatformTransactionManager}
  * class, which pre-implements the defined propagation behavior and takes care
@@ -109,6 +112,9 @@ public interface PlatformTransactionManager extends TransactionManager {
 	 * The transaction will already have been completed and cleaned up when commit
 	 * returns, even in case of a commit exception. Consequently, a rollback call
 	 * after commit failure will lead to an IllegalTransactionStateException.
+	 *
+	 * 事务提交时抛出异常时，不要调用回滚方法，因为事务可能已经完成并清理了提交的内容。此时，调用回滚
+	 * 操作将抛出非法事务状态的异常。
 	 * @param status object returned by the {@code getTransaction} method
 	 * @throws TransactionSystemException in case of rollback or system errors
 	 * (typically caused by fundamental resource failures)
