@@ -512,9 +512,9 @@ https://host:port/myApp/myEndpoint/{server-id}/{session-id}/{transport}
 
 where:
 
-* `{server-id}` is useful for routing requests in a cluster but is not used otherwise.
-* `{session-id}` correlates HTTP requests belonging to a SockJS session.
-* `{transport}` indicates the transport type (for example, `websocket`, `xhr-streaming`, and others).
+* pass:q[`{server-id}`] is useful for routing requests in a cluster but is not used otherwise.
+* pass:q[`{session-id}`] correlates HTTP requests belonging to a SockJS session.
+* pass:q[`{transport}`] indicates the transport type (for example, `websocket`, `xhr-streaming`, and others).
 
 The WebSocket transport needs only a single HTTP request to do the WebSocket handshake.
 All messages thereafter are exchanged on that socket.
@@ -1254,7 +1254,7 @@ level, `@MessageMapping` is used to express shared mappings across all methods i
 controller.
 
 By default, the mapping values are Ant-style path patterns (for example `/thing*`, `/thing/**`),
-including support for template variables (for example, `/thing/{id}`). The values can be
+including support for template variables (for example, pass:q[`/thing/{id}`]). The values can be
 referenced through `@DestinationVariable` method arguments. Applications can also switch to
 a dot-separated destination convention for mappings, as explained in
 <<websocket-stomp-destination-separator>>.
@@ -1862,7 +1862,7 @@ with other users who subscribe to the same destination so that each user can rec
 unique stock position updates.
 
 On the sending side, messages can be sent to a destination such as
-`/user/{username}/queue/position-updates`, which in turn is translated
+pass:q[`/user/{username}/queue/position-updates`], which in turn is translated
 by the `UserDestinationMessageHandler` into one or more destinations, one for each
 session associated with the user. This lets any component within the application
 send messages that target a specific user without necessarily knowing anything more
@@ -2103,7 +2103,7 @@ While a `ChannelInterceptor` is invoked once for each message sent to a channel,
 `ExecutorChannelInterceptor` provides hooks in the thread of each `MessageHandler`
 subscribed to messages from the channel.
 
-Note that, as with the `SesionDisconnectEvent` described earlier, a DISCONNECT message
+Note that, as with the `SessionDisconnectEvent` described earlier, a DISCONNECT message
 can be from the client or it can also be automatically generated when
 the WebSocket session is closed. In some cases, an interceptor may intercept this
 message more than once for each session. Components should be idempotent with regard to
@@ -2193,6 +2193,14 @@ To enable STOMP heartbeat, you can configure `WebSocketStompClient` with a `Task
 and optionally customize the heartbeat intervals (10 seconds for write inactivity,
 which causes a heartbeat to be sent, and 10 seconds for read inactivity, which
 closes the connection).
+
+`WebSocketStompClient` sends a heartbeat only in case of inactivity, i.e. when no
+other messages are sent. This can present a challenge when using an external broker
+since messages with a non-broker destination represent activity but aren't actually
+forwarded to the broker. In that case you can configure a `TaskScheduler`
+when initializing the <<websocket-stomp-handle-broker-relay>> which ensures a
+heartbeat is forwarded to the broker also when only messages with a non-broker
+destination are sent.
 
 NOTE: When you use `WebSocketStompClient` for performance tests to simulate thousands
 of clients from the same machine, consider turning off heartbeats, since each
